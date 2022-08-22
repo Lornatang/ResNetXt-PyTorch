@@ -18,8 +18,8 @@ from torch import Tensor
 from torch import nn
 
 __all__ = [
-    "WideResNet",
-    "resnet18",
+    "ResNetXt",
+    "resnetxt50_32x4d", "resnetxt101_32x8d", "resnetxt101_64x4d",
 ]
 
 
@@ -117,7 +117,7 @@ class _Bottleneck(nn.Module):
         return out
 
 
-class WideResNet(nn.Module):
+class ResNetXt(nn.Module):
 
     def __init__(
             self,
@@ -127,7 +127,7 @@ class WideResNet(nn.Module):
             channels_per_group: int = 64,
             num_classes: int = 1000,
     ) -> None:
-        super(WideResNet, self).__init__()
+        super(ResNetXt, self).__init__()
         self.in_channels = 64
         self.dilation = 1
         self.groups = groups
@@ -222,13 +222,19 @@ class WideResNet(nn.Module):
                 nn.init.constant_(module.bias, 0)
 
 
-def wide_resnet50(**kwargs: Any) -> WideResNet:
-    model = WideResNet([3, 4, 6, 3], _Bottleneck, channels_per_group=128, **kwargs)
+def resnetxt50_32x4d(**kwargs: Any) -> ResNetXt:
+    model = ResNetXt([3, 4, 6, 3], _Bottleneck, 32, 4, **kwargs)
 
     return model
 
 
-def wide_resnet101(**kwargs: Any) -> WideResNet:
-    model = WideResNet([3, 4, 23, 3], _Bottleneck, channels_per_group=128, **kwargs)
+def resnetxt101_32x8d(**kwargs: Any) -> ResNetXt:
+    model = ResNetXt([3, 4, 23, 3], _Bottleneck, 32, 8, **kwargs)
+
+    return model
+
+
+def resnetxt101_64x4d(**kwargs: Any) -> ResNetXt:
+    model = ResNetXt([3, 4, 23, 3], _Bottleneck, 64, 4, **kwargs)
 
     return model

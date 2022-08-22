@@ -1,13 +1,13 @@
-# Wide_ResNet-PyTorch
+# ResNetXt-PyTorch
 
 ## Overview
 
 This repository contains an op-for-op PyTorch reimplementation
-of [Wide Residual Networks](https://arxiv.org/pdf/1605.07146v4.pdf).
+of [Aggregated Residual Transformations for Deep Neural Networks](https://arxiv.org/pdf/1611.05431.pdf).
 
 ## Table of contents
 
-- [Wide_ResNet-PyTorch](#wide_resnet-pytorch)
+- [ResNetXt-PyTorch](#resnetxt-pytorch)
     - [Overview](#overview)
     - [Table of contents](#table-of-contents)
     - [Download weights](#download-weights)
@@ -19,7 +19,7 @@ of [Wide Residual Networks](https://arxiv.org/pdf/1605.07146v4.pdf).
     - [Result](#result)
     - [Contributing](#contributing)
     - [Credit](#credit)
-        - [Wide Residual Networks](#wide-residual-networks)
+        - [Aggregated Residual Transformations for Deep Neural Networks](#aggregated-residual-transformations-for-deep-neural-networks)
 
 ## Download weights
 
@@ -41,12 +41,12 @@ Both training and testing only need to modify the `config.py` file.
 
 ### Test
 
-- line 29: `model_arch_name` change to `wide_resnet50`.
+- line 29: `model_arch_name` change to `resnetxt50_32x4d`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `test`.
-- line 89: `model_weights_path` change to `./results/pretrained_models/Wide_ResNet50-ImageNet_1K-d5b3452e.pth.tar`.
+- line 89: `model_weights_path` change to `./results/pretrained_models/ResNetXt50_32x4d-ImageNet_1K-7a64b822.pth.tar`.
 
 ```bash
 python3 test.py
@@ -54,12 +54,13 @@ python3 test.py
 
 ### Train model
 
-- line 29: `model_arch_name` change to `wide_resnet50`.
+- line 29: `model_arch_name` change to `resnetxt50_32x4d`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `train`.
-- line 50: `pretrained_model_weights_path` change to `./results/pretrained_models/Wide_ResNet50-ImageNet_1K-d5b3452e.pth.tar`.
+- line 50: `pretrained_model_weights_path` change
+  to `./results/pretrained_models/ResNetXt50_32x4d-ImageNet_1K-7a64b822.pth.tar`.
 
 ```bash
 python3 train.py
@@ -67,12 +68,12 @@ python3 train.py
 
 ### Resume train model
 
-- line 29: `model_arch_name` change to `wide_resnet50`.
+- line 29: `model_arch_name` change to `resnetxt50_32x4d`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `train`.
-- line 53: `resume` change to `./samples/wide_resnet50-ImageNet_1K/epoch_xxx.pth.tar`.
+- line 53: `resume` change to `./samples/resnetxt50_32x4d-ImageNet_1K/epoch_xxx.pth.tar`.
 
 ```bash
 python3 train.py
@@ -80,17 +81,18 @@ python3 train.py
 
 ## Result
 
-Source of original paper results: [https://arxiv.org/pdf/1605.07146v4.pdf](https://arxiv.org/pdf/1605.07146v4.pdf))
+Source of original paper results: [https://arxiv.org/pdf/1611.05431.pdf](https://arxiv.org/pdf/1611.05431.pdf))
 
 In the following table, the top-x error value in `()` indicates the result of the project, and `-` indicates no test.
 
-|     Model      |   Dataset   | Top-1 error (val) | Top-5 error (val) |
-|:--------------:|:-----------:|:-----------------:|:-----------------:|
-| wide_resnet50  | ImageNet_1K | 21.9%(**18.70%**) | 6.03%(**4.49%**)  |
-| wide_resnet101 | ImageNet_1K |  2-(**26.71%**)   |   -(**8.58%**)    |
+|       Model       |   Dataset   | Top-1 error (val) | Top-5 error (val) |
+|:-----------------:|:-----------:|:-----------------:|:-----------------:|
+| resnetxt50_32x4d  | ImageNet_1K | 21.9%(**18.70%**) | 6.03%(**4.49%**)  |
+| resnetxt101_32x8d | ImageNet_1K |   -(**26.71%**)   |   -(**8.58%**)    |
+| resnetxt101_64x4d | ImageNet_1K |   -(**26.71%**)   |   -(**8.58%**)    |
 
 ```bash
-# Download `Wide_ResNet50-ImageNet_1K-d5b3452e.pth.tar` weights to `./results/pretrained_models`
+# Download `ResNetXt50_32x4d-ImageNet_1K-7a64b822.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
 python3 ./inference.py 
 ```
@@ -102,13 +104,13 @@ Input:
 Output:
 
 ```text
-Build `wide_resnet50` model successfully.
-Load `wide_resnet50` model weights `/Wide_ResNet-PyTorch/results/pretrained_models/Wide_ResNet50-ImageNet_1K-d5b3452e.pth.tar` successfully.
-tench, Tinca tinca                                                          (59.80%)
-barracouta, snoek                                                           (1.35%)
-gar, garfish, garpike, billfish, Lepisosteus osseus                         (0.19%)
-plastic bag                                                                 (0.18%)
-water bottle                                                                (0.13%)
+Build `resnetxt50_32x4d` model successfully.
+Load `resnetxt50_32x4d` model weights `/ResNetXt-PyTorch/results/pretrained_models/ResNetXt50_32x4d-ImageNet_1K-7a64b822.pth.tar` successfully.
+tench, Tinca tinca                                                          (80.20%)
+barracouta, snoek                                                           (1.36%)
+water bottle                                                                (0.16%)
+armadillo                                                                   (0.09%)
+gar, garfish, garpike, billfish, Lepisosteus osseus                         (0.08%)
 ```
 
 ## Contributing
@@ -120,34 +122,31 @@ I look forward to seeing what the community does with these models!
 
 ### Credit
 
-#### Wide Residual Networks
+#### Aggregated Residual Transformations for Deep Neural Networks
 
-*Sergey Zagoruyko, Nikos Komodakis*
+*Saining Xie, Ross Girshick, Piotr Dollár, Zhuowen Tu, Kaiming He*
 
 ##### Abstract
 
-Deep residual networks were shown to be able to scale up to thousands of layers
-and still have improving performance. However, each fraction of a percent of improved
-accuracy costs nearly doubling the number of layers, and so training very deep residual networks has a problem of
-diminishing feature reuse, which makes these networks
-very slow to train. To tackle these problems, in this paper we conduct a detailed experimental study on the architecture
-of ResNet blocks, based on which we propose a novel
-architecture where we decrease depth and increase width of residual networks. We call
-the resulting network structures wide residual networks (WRNs) and show that these are
-far superior over their commonly used thin and very deep counterparts. For example,
-we demonstrate that even a simple 16-layer-deep wide residual network outperforms in
-accuracy and efficiency all previous deep residual networks, including thousand-layerdeep networks, achieving new
-state-of-the-art results on CIFAR, SVHN, COCO, and
-significant improvements on ImageNet. Our code and models are available
-at https://github.com/szagoruyko/wide-residual-networks.
+We present a simple, highly modularized network architecture for image classification. Our network is constructed by
+repeating a building block that aggregates a set of transformations with the same topology. Our simple design results in
+a homogeneous, multi-branch architecture that has only a few hyper-parameters to set. This strategy exposes a new
+dimension, which we call "cardinality" (the size of the set of transformations), as an essential factor in addition to
+the dimensions of depth and width. On the ImageNet-1K dataset, we empirically show that even under the restricted
+condition of maintaining complexity, increasing cardinality is able to improve classification accuracy. Moreover,
+increasing cardinality is more effective than going deeper or wider when we increase the capacity. Our models, named
+ResNeXt, are the foundations of our entry to the ILSVRC 2016 classification task in which we secured 2nd place. We
+further investigate ResNeXt on an ImageNet-5K set and the COCO detection set, also showing better results than its
+ResNet counterpart. The code and models are publicly available online.
 
-[[Paper]](https://arxiv.org/pdf/1605.07146v4.pdf)
+[[Paper]](https://arxiv.org/pdf/1611.05431.pdf)
 
 ```bibtex
-@article{zagoruyko2016wide,
-  title={Wide residual networks},
-  author={Zagoruyko, Sergey and Komodakis, Nikos},
-  journal={arXiv preprint arXiv:1605.07146},
-  year={2016}
+@inproceedings{xie2017aggregated,
+  title={Aggregated residual transformations for deep neural networks},
+  author={Xie, Saining and Girshick, Ross and Doll{\'a}r, Piotr and Tu, Zhuowen and He, Kaiming},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={1492--1500},
+  year={2017}
 }
 ```
