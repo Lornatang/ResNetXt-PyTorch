@@ -87,9 +87,9 @@ In the following table, the top-x error value in `()` indicates the result of th
 
 |       Model       |   Dataset   | Top-1 error (val) | Top-5 error (val) |
 |:-----------------:|:-----------:|:-----------------:|:-----------------:|
-| resnetxt50_32x4d  | ImageNet_1K | 21.9%(**18.70%**) | 6.03%(**4.49%**)  |
-| resnetxt101_32x8d | ImageNet_1K |   -(**26.71%**)   |   -(**8.58%**)    |
-| resnetxt101_64x4d | ImageNet_1K |   -(**26.71%**)   |   -(**8.58%**)    |
+| resnetxt50_32x4d  | ImageNet_1K |   -(**19.13%**)   |   -(**4.69%**)    |
+| resnetxt101_32x8d | ImageNet_1K |   -(**17.57%**)   |   -(**3.87%**)    |
+| resnetxt101_64x4d | ImageNet_1K | 20.4%(**17.03%**) |  5.3%(**3.74%**)  |
 
 ```bash
 # Download `ResNetXt50_32x4d-ImageNet_1K-7a64b822.pth.tar` weights to `./results/pretrained_models`
